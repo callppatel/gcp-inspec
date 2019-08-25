@@ -1,0 +1,269 @@
+---
+ssl_policy:
+  name: inspec-gcp-ssl-policy
+  min_tls_version: TLS_1_2
+  profile: CUSTOM
+  custom_feature: TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+  custom_feature2: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+topic:
+  name: inspec-gcp-topic
+subscription:
+  name: inspec-gcp-subscription
+  ack_deadline_seconds: 20
+managed_zone:
+  name: inspec-gcp-managed-zone
+  dns_name: my.domain.com.
+  description: A test DNS zone
+  label_key: key
+  label_value: value
+record_set:
+  name: backend.my.domain.com.
+  type: A
+  ttl: 300
+  rrdatas1: 8.8.8.8
+  rrdatas2: 8.8.4.4
+instance_group_manager:
+  name: inspec-gcp-igm
+  base_instance_name: igm
+  named_port_name: port
+  named_port_port: 80
+autoscaler:
+  name: inspec-gcp-autoscaler
+  max_replicas: 5
+  min_replicas: 1
+  cooldown_period: 60
+  cpu_utilization_target: 0.5
+target_pool:
+  name: inspec-gcp-target-pool
+  session_affinity: CLIENT_IP
+trigger:
+  trigger_template_project: trigger-project
+  trigger_template_branch: trigger-branch
+  trigger_template_repo: trigger-repo
+  filename: cloudbuild.yaml
+health_check:
+  name: inspec-gcp-health-check
+  timeout_sec: 10
+  check_interval_sec: 10
+  tcp_health_check_port: 80
+backend_service:
+  name: inspec-gcp-backend-service
+  description: A description
+  port_name: http
+  protocol: HTTP
+  timeout_sec: 10
+  enable_cdn: true
+region_backend_service_health_check:
+  name: inspec-gcp-region-health-check
+  timeout_sec: 15
+  check_interval_sec: 15
+  tcp_health_check_port: 81
+region_backend_service:
+  name: inspec-gcp-region-backend-service
+  description: A regional description
+  protocol: TCP
+  timeout_sec: 15
+http_health_check:
+  name: inspec-gcp-http-health-check
+  request_path: "/health_check"
+  timeout_sec: 20
+  check_interval_sec: 20
+https_health_check:
+  name: inspec-gcp-https-health-check
+  request_path: "/https_health_check"
+  timeout_sec: 15
+  check_interval_sec: 15
+  unhealthy_threshold: 3
+instance_template:
+  name: inspec-gcp-instance-template
+  description: A description of the instance template
+  instance_description: A description of the instance itself
+  machine_type: f1-micro
+  tag: foo
+  can_ip_forward: false
+  scheduling_automatic_restart: true
+  scheduling_on_host_maintenance: MIGRATE
+  disk_source_image: debian-cloud/debian-9
+  disk_auto_delete: true
+  disk_boot: true
+  network_interface_network: default
+  service_account_scope: storage-ro
+global_address:
+  name: inspec-gcp-global-address
+  ip_version: IPV6
+url_map:
+  name: inspec-gcp-url-map
+  description: URL map description
+  host_rule_host: site.com
+  path_matcher_name: allpaths
+  path_rule_path: "/home"
+  test_host: test.com
+  test_path: "/home"
+http_proxy:
+  name: inspec-gcp-http-proxy
+  description: A HTTP proxy
+global_forwarding_rule:
+  name: inspec-gcp-global-forwarding-rule
+  port_range: 80-80
+target_tcp_proxy:
+  name: inspec-gcp-target-tcp-proxy
+  proxy_header: NONE
+  tcp_backend_service_name: gcp-inspec-tcp-backend-service
+regional_cluster:
+  name: inspec-gcp-regional-cluster
+  initial_node_count: 1
+route:
+  name: inspec-gcp-route
+  dest_range: 15.0.0.0/24
+  next_hop_ip: 10.2.0.1
+  priority: 100
+router:
+  name: inspec-gcp-router
+  bgp_asn: 64514
+  bgp_advertise_mode: CUSTOM
+  bgp_advertised_group: ALL_SUBNETS
+  bgp_advertised_ip_range1: 1.2.3.4
+  bgp_advertised_ip_range2: 6.7.0.0/16
+snapshot:
+  name: inspec-gcp-disk-snapshot
+https_proxy:
+  name: inspec-gcp-https-proxy
+  description: A HTTPS target proxy
+ssl_certificate:
+  name: inspec-gcp-ssl-certificate
+  description: A fake ssl certificate (DO NOT USE)
+  certificate: |
+    -----BEGIN CERTIFICATE-----
+    MIICqjCCAk+gAwIBAgIJAIuJ+0352Kq4MAoGCCqGSM49BAMCMIGwMQswCQYDVQQG
+    EwJVUzETMBEGA1UECAwKV2FzaGluZ3RvbjERMA8GA1UEBwwIS2lya2xhbmQxFTAT
+    BgNVBAoMDEdvb2dsZSwgSW5jLjEeMBwGA1UECwwVR29vZ2xlIENsb3VkIFBsYXRm
+    b3JtMR8wHQYDVQQDDBZ3d3cubXktc2VjdXJlLXNpdGUuY29tMSEwHwYJKoZIhvcN
+    AQkBFhJuZWxzb25hQGdvb2dsZS5jb20wHhcNMTcwNjI4MDQ1NjI2WhcNMjcwNjI2
+    MDQ1NjI2WjCBsDELMAkGA1UEBhMCVVMxEzARBgNVBAgMCldhc2hpbmd0b24xETAP
+    BgNVBAcMCEtpcmtsYW5kMRUwEwYDVQQKDAxHb29nbGUsIEluYy4xHjAcBgNVBAsM
+    FUdvb2dsZSBDbG91ZCBQbGF0Zm9ybTEfMB0GA1UEAwwWd3d3Lm15LXNlY3VyZS1z
+    aXRlLmNvbTEhMB8GCSqGSIb3DQEJARYSbmVsc29uYUBnb29nbGUuY29tMFkwEwYH
+    KoZIzj0CAQYIKoZIzj0DAQcDQgAEHGzpcRJ4XzfBJCCPMQeXQpTXwlblimODQCuQ
+    4mzkzTv0dXyB750fOGN02HtkpBOZzzvUARTR10JQoSe2/5PIwaNQME4wHQYDVR0O
+    BBYEFKIQC3A2SDpxcdfn0YLKineDNq/BMB8GA1UdIwQYMBaAFKIQC3A2SDpxcdfn
+    0YLKineDNq/BMAwGA1UdEwQFMAMBAf8wCgYIKoZIzj0EAwIDSQAwRgIhALs4vy+O
+    M3jcqgA4fSW/oKw6UJxp+M6a+nGMX+UJR3YgAiEAvvl39QRVAiv84hdoCuyON0lJ
+    zqGNhIPGq2ULqXKK8BY=
+    -----END CERTIFICATE-----
+  private_key: |
+    -----BEGIN EC PRIVATE KEY-----
+    MHcCAQEEIObtRo8tkUqoMjeHhsOh2ouPpXCgBcP+EDxZCB/tws15oAoGCCqGSM49
+    AwEHoUQDQgAEHGzpcRJ4XzfBJCCPMQeXQpTXwlblimODQCuQ4mzkzTv0dXyB750f
+    OGN02HtkpBOZzzvUARTR10JQoSe2/5PIwQ==
+    -----END EC PRIVATE KEY-----
+dataset:
+  dataset_id: inspec_gcp_dataset
+  friendly_name: A BigQuery dataset test
+  description: Test BigQuery dataset description
+  location: EU
+  default_table_expiration_ms: 3600000
+  access_writer_role: WRITER
+  access_writer_special_group: projectWriters
+bigquery_table:
+  table_id: inspec_gcp_bigquery_table
+  description: A BigQuery table
+  expiration_time: 1738882264000
+  time_partitioning_type: DAY
+repository:
+  name: inspec-gcp-repository
+folder:
+  display_name: inspec-gcp-folder
+cloudfunction:
+  name: inspec-gcp-function
+  description: A description of the function
+  available_memory_mb: 128
+  trigger_http: true
+  timeout: 60
+  entry_point: hello
+  env_var_value: val1
+backend_bucket:
+  name: inspec-gcp-backend-bucket
+  description: Backend bucket example
+  enable_cdn: true
+regional_node_pool:
+  name: inspec-gcp-regional-node-pool
+  cluster_name: inspec-gcp-regional-node-pool-cluster
+  node_count: 1
+  initial_node_count: 1
+:gcp_project_name: SPaterson Project
+:gcp_project_id: spaterson-project
+:gcp_project_number: '1041358276233'
+:gcp_location: europe-west2
+:gcp_zone: europe-west2-a
+:gcp_zone_id: '2290'
+:gcp_region_id: '1290'
+:gcp_cloud_function_region: us-central1
+:gcp_int_vm_name: gcp-inspec-int-linux-vm
+:gcp_int_vm_size: f1-micro
+:gcp_int_vm_image: ubuntu-os-cloud/ubuntu-1604-lts
+:gcp_ext_vm_name: gcp-inspec-ext-linux-vm
+:gcp_ext_vm_size: f1-micro
+:gcp_ext_vm_image: ubuntu-os-cloud/ubuntu-1604-lts
+:gcp_ext_compute_address_name: gcp-inspec-generic-ext-compute-address
+:gcp_windows_int_vm_image: windows-cloud/windows-server-2016-dc-core-v20180313
+:gcp_windows_int_vm_name: gcp-inspec-int-windows-vm
+:gcp_windows_int_vm_size: g1-small
+:gcp_service_account_display_name: gcp-inspec-service-account
+:gcp_project_iam_custom_role_id: gcp_inspec_custom_role_id_twvsbtglglkhwhxxwpfgsyxuh
+:gcp_compute_disk_name: gcp-inspec-compute-disk-name
+:gcp_compute_disk_type: pd-standard
+:gcp_compute_disk_image: ubuntu-os-cloud/ubuntu-1604-lts
+:gcp_ext_vm_data_disk_address_name: gcp-inspec-generic-ext-compute-data-disk-address
+:gcp_ext_vm_data_disk_name: gcp-inspec-generic-ext-linux-vm-data-disk
+:gcp_ext_vm_data_disk_size: f1-micro
+:gcp_ext_vm_data_disk_image: ubuntu-os-cloud/ubuntu-1604-lts
+:gcp_storage_bucket_name: gcp-inspec-storage-bucket-ysxipunjodgpoagcbjmthxroj
+:gcp_storage_bucket_acl: gcp-inspec-storage-bucket-acl-cbovpfqtfgyylpxmntlytndju
+:gcp_storage_bucket_binding: gcp-inspec-storage-bucket-iam-binding-tfjanxalwowzjkubgngvedrko
+:gcp_storage_bucket_member: gcp-inspec-storage-bucket-iam-member-zglxbjjzdewnwwlmxgmyigpmu
+:gcp_storage_bucket_policy: gcp-inspec-storage-bucket-iam-policy-sqqbqptdfeevevgxswsyhlldc
+:gcp_storage_bucket_object: gcp-inspec-storage-bucket-object-fjzserrljaplnkzxpmhqqxjge
+:gcp_storage_bucket_object_name: bucket-object-huhttncnkbersvarudcytnctc
+:gcp_lb_network: default
+:gcp_lb_region: europe-west2
+:gcp_lb_zone: europe-west2-a
+:gcp_lb_zone_mig2: europe-west2-b
+:gcp_lb_zone_mig3: europe-west2-c
+:gcp_lb_fr_name: gcp-inspec-app-lb-fr-mig1
+:gcp_lb_ilb_name: gcp-inspec-app-lb-internal
+:gcp_lb_mig1_name: gcp-inspec-app-mig1
+:gcp_lb_mig2_name: gcp-inspec-app-mig2
+:gcp_lb_mig3_name: gcp-inspec-app-mig3
+:gcp_kube_cluster_name: gcp-inspec-kube-cluster
+:gcp_kube_cluster_zone: europe-west2-a
+:gcp_kube_cluster_size: 1
+:gcp_kube_cluster_zone_extra1: europe-west2-b
+:gcp_kube_cluster_zone_extra2: europe-west2-c
+:gcp_kube_cluster_master_user: gcp-inspec-kube-admin
+:gcp_kube_cluster_master_pass: WHn!5EhXKUobQ&36ugDa
+:gcp_kube_nodepool_name: default-pool
+:gcp_inspec_user_email: user:chef@example.com
+:gcp_kms_key_ring_policy_name: gcp-inspec-kms-key-ring-omqvyoxdyxgcbikjetnvrgarr
+:gcp_kms_key_ring_binding_member_name: gcp-inspec-kms-key-ring-offbqijqstvgttxlsjhklioko
+:gcp_kms_crypto_key_name_policy: gcp-inspec-kms-crypto-key-policy-hjyxeaegosojhmdullrjgddop
+:gcp_kms_crypto_key_name_binding: gcp-inspec-kms-crypto-key-binding-regfkjpuygyxynljwdjxbqmac
+:gcp_logging_vm_name: gcp-inspec-logging-vm
+:gcp_logging_bucket_name: gcp-inspec-logging-pstaetcxvwosimxczozrwquak
+:gcp_logging_project_sink_name: gcp-inspec-logging-project-mejnjiezdpapikxczzllhzstn
+:gcp_logging_project_exclusion_name: gcp-inspec-project-exclusion-hxffceajjiagurernmyvlyhzg
+:gcp_network_name: gcp-inspec-network
+:gcp_subnetwork_name: gcp-inspec-subnetwork
+:gcp_vpn_gateway_name: gcp-inspec-gateway
+:gcp_vpn_tunnel_name: gcp-inspec-tunnel
+:gcp_fr_esp_name: gcp-inspec-fr-esp
+:gcp_fr_udp_name: gcp-inspec-fr-udp
+:gcp_address_name: gcp-inspec-address
+:gcp_vpn_address_name: gcp-inspec-vpn-address
+:gcp_db_instance_name: gcp-inspec-db-ooqikqrgpoqzhhppieyrrykix
+:gcp_db_name: inspecgcp
+:gcp_db_type: MYSQL_5_7
+:gcp_db_size: db-f1-micro
+:gcp_db_user_name: inspecgcpuser
+:gcp_db_user_password: Dh5/syti$Na%SldZbUAO
+:gcp_enable_privileged_resources: 0
+:gcp_enable_gcloud_calls: 0
