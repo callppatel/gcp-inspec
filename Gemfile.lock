@@ -298,7 +298,7 @@ GEM
       tty-table (~> 0.10)
     jaro_winkler (1.5.3)
     jmespath (1.4.0)
-    json (2.2.0)
+    json (2.3.1)
     jwt (2.2.1)
     little-plugger (1.1.4)
     logging (2.2.2)
